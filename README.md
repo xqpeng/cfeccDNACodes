@@ -43,38 +43,44 @@ conda activate cfeccDNA_analysis
 1. **sh map.sh *<input_dir>* *<output_dir>* *<genome_index_dir>***
    
    Function: Align the paired fastq files from the file directory *input_dir*, and output the sorted bam files to the file directory *output_dir*.
+   
    Make sure you have built indexed reference genome and provided it in *genome_index_dir*.
+   
    Input parameters:
-          (1) *<input_dir>*: the file directory containing the paired fastq files
-          (2) *<output_dir>*: the file directory to store the sorted bam files
-          (3) *<genome_index_dir>*: the directory containing the indexed reference genome
+   
+          (1) <input_dir>: the file directory containing the paired fastq files
+   
+          (2) <output_dir>: the file directory to store the sorted bam files
+   
+          (3) <genome_index_dir>: the directory containing the indexed reference genome
+   
     Output: Sorted bam files
 
-2. **sh runSplit_read.sh *<input_dir>* *<output_dir>***
+3. **sh runSplit_read.sh *<input_dir>* *<output_dir>***
    
    Function: Extract split-aligned fragments from sorted BAM files.
    
    Input parameters:
    
-         (1) *<input_dir>*: the file directory containing the sorted bam files
+         (1) <input_dir>: the file directory containing the sorted bam files
    
-         (2) *<output_dir>*: the file directory to store the bam files of split-aligned fragments
+         (2) <output_dir>: the file directory to store the bam files of split-aligned fragments
    
    Output: The bam files of split-aligned fragments
    
-3. **runDiscordant_read.sh *<input_dir>* *<output_dir>***
+4. **runDiscordant_read.sh *<input_dir>* *<output_dir>***
 
    Function: Extract discordantly-aligned fragments from sorted BAM files.
    
    Input parameters:
    
-         (1) *<input_dir>*: the file directory containing the sorted bam files
+         (1) <input_dir>: the file directory containing the sorted bam files
    
-         (2) *<output_dir>*: the file directory to store the bam files of split-aligned fragments
+         (2) <output_dir>: the file directory to store the bam files of split-aligned fragments
    
    Output: The bam files of split-aligned fragments
    
-4. **perl SplitAnalysis.pl *<list_file>***
+5. **perl SplitAnalysis.pl *<list_file>***
 
    Function:
    
@@ -87,7 +93,7 @@ conda activate cfeccDNA_analysis
           (4) Perform lengths, endpoint distances, and identical 6-mer end motifs analysis on the split-aligned fragments from each group.
 
    Input parameter:
-          (1)  *<list_file>* is a file contain the split-aligned SAM filenames of a group of samples.
+          (1)  <list_file> is a file contain the split-aligned SAM filenames of a group of samples.
    
               For example: list_HCC
    
@@ -119,7 +125,7 @@ conda activate cfeccDNA_analysis
    
 	       (8) Files of the 5ends of fragments corresponding to the files in the input file. 
    
-5. **perl DiscordantAnalysis.pl  *<list_file>***
+6. **perl DiscordantAnalysis.pl  *<list_file>***
    
    Function:
    
@@ -128,7 +134,7 @@ conda activate cfeccDNA_analysis
          (2) Perform  identical 6-mer end motifs analysis on the discordant-aligned fragments from each group
 
    Input parameter:
-         (1) Parameter *list_file* is a file contain the discordantly-aligned SAM filenames of a group of samples.
+         (1) list_file is a file contain the discordantly-aligned SAM filenames of a group of samples.
    
              For example: list_HCC_discordant_pairs
    
@@ -154,9 +160,9 @@ conda activate cfeccDNA_analysis
    
    Input parameter:
    
-   	     (1)*<feature1,feature2,...>*: available features include BPM, EDM, JNM, SBM, OJM, OLR, CNV_onco, and CNV_im.
+   	     (1)<feature1,feature2,...>: available features include BPM, EDM, JNM, SBM, OJM, OLR, CNV_onco, and CNV_im.
 		 
-		 (2)*<dir1>*  *<dir2>* ...: the file directories containing the bam files of split_fragments/discordant_fragments. For bam files with discordant_fragments, only BPM, EDM, CNV_onco, and CNV_im are extracted. For bam files with split_fragments, BPM, EDM, JNM, SBM, OJM, OLR, CNV_onco, and CNV_im are extracted.
+		 (2)<dir1>  <dir2> ...: the file directories containing the bam files of split_fragments/discordant_fragments. For bam files with discordant_fragments, only BPM, EDM, CNV_onco, and CNV_im are extracted. For bam files with split_fragments, BPM, EDM, JNM, SBM, OJM, OLR, CNV_onco, and CNV_im are extracted.
 		 
    Output: A feature directory corresponding to each feature type is built for each input directory, and includes the feature profiles corresponding to the files under the input directory.
    
@@ -170,9 +176,9 @@ conda activate cfeccDNA_analysis
     
     Input parameter:
     
-          (1)*<Control_samples_dir>*: A directory containing eight sub-directories corresponding to eight types of cf-eccDNA features of control samples.
+          (1)<Control_samples_dir>: A directory containing eight sub-directories corresponding to eight types of cf-eccDNA features of control samples.
     
-          (2)*<DiseaseCase_samples_dir>*: A directory containing eight sub-directories corresponding to eight types of cf-eccDNA features of case samples.
+          (2)<DiseaseCase_samples_dir>: A directory containing eight sub-directories corresponding to eight types of cf-eccDNA features of case samples.
     
     Output:
     

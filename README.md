@@ -7,10 +7,6 @@ The functions provided in cf-eccDNACodes are illustrated as follows.
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
     src="https://github.com/user-attachments/assets/a340c24a-5bd7-4a71-ba5e-acc5f64c6feb">
     <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">cfDNAFE Function</div>
 </center>
 <br/>
 
@@ -41,7 +37,7 @@ cd cfeccDNACodes
 2. **Recommended Step:** (Conda users, Conda version: 4.12.0) Create your environment and activate it:
 ```
 conda env create -f environment.yml
-conda activate cfeccDNACodes
+conda activate cfeccDNA_analysis
 ```
 ## Usage
 1. **sh map.sh *<input_dir>* *<output_dir>* *<genome_index_dir>***
@@ -54,91 +50,137 @@ conda activate cfeccDNACodes
           (3) *<genome_index_dir>*: the directory containing the indexed reference genome
     Output: Sorted bam files
 
-3. **sh runSplit_read.sh *<input_dir>* *<output_dir>***
+2. **sh runSplit_read.sh *<input_dir>* *<output_dir>***
    
    Function: Extract split-aligned fragments from sorted BAM files.
+   
    Input parameters:
+   
          (1) *<input_dir>*: the file directory containing the sorted bam files
+   
          (2) *<output_dir>*: the file directory to store the bam files of split-aligned fragments
+   
    Output: The bam files of split-aligned fragments
    
-5. **runDiscordant_read.sh *<input_dir>* *<output_dir>***
+3. **runDiscordant_read.sh *<input_dir>* *<output_dir>***
 
    Function: Extract discordantly-aligned fragments from sorted BAM files.
+   
    Input parameters:
+   
          (1) *<input_dir>*: the file directory containing the sorted bam files
+   
          (2) *<output_dir>*: the file directory to store the bam files of split-aligned fragments
+   
    Output: The bam files of split-aligned fragments
    
-7. **perl SplitAnalysis.pl *<list_file>***
+4. **perl SplitAnalysis.pl *<list_file>***
 
    Function:
    
-   (1) Extract two ends of each fragment, following the sequencing direction 5'-3'.
+          (1) Extract two ends of each fragment, following the sequencing direction 5'-3'.
    
-   (2) Perform statistic analysis on the split-aligned fragments from each sample.
+          (2) Perform statistic analysis on the split-aligned fragments from each sample.
    
-   (3) Perform length analysis on the split-aligned fragments from a group of samples.
+          (3) Perform length analysis on the split-aligned fragments from a group of samples.
 
-   (4) Perform lengths, endpoint distances, and identical 6-mer end motifs analysis on the split-aligned fragments from each group.
+          (4) Perform lengths, endpoint distances, and identical 6-mer end motifs analysis on the split-aligned fragments from each group.
 
    Input parameter:
           (1)  *<list_file>* is a file contain the split-aligned SAM filenames of a group of samples.
-              For example: list_HCC
-		      which contains three lines and there is a filename on each line, such as following:
-				         HCC1.split_reads.sam
-				         HCC2.split_reads.sam
-				         HCC3.split_reads.sam
-                         ...
-   Output: 1. statics_proportion_length_list_HCC; # corresponding to  function 2
-          (Belowing are optional)
-		   2. File of Fragment length distribution
-		   3. File of eccDNA molecules size distribution
-		   4. File of endpoint distance distribution of Same-Strand 5' Ends fragments
-		   5. File of endpoint distance distribution of Opposite-Strand 5' Ends fragments
-		   6. File of Identical 6-mer end motifs profile of Same-Strand 5' Ends fragments
-		   7. File of Identical 6-mer end motifs profile of split-aligned fragments fragments
-	       8. Files of the 5ends of fragments corresponding to the files in the input file. 
    
-9. **perl DiscordantAnalysis.pl  *<list_file>***
+              For example: list_HCC
+   
+		      which contains three lines and there is a filename on each line, such as following:
+   
+				         HCC1.split_reads.sam
+   
+				         HCC2.split_reads.sam
+   
+				         HCC3.split_reads.sam
+   
+                         ...
+   Output:
+           (1) statics_proportion_length_list_HCC; # corresponding to  function 2
+   
+           (Belowing are optional)
+   
+		   (2) File of Fragment length distribution
+   
+		   (3) File of eccDNA molecules size distribution
+   
+		   (4) File of endpoint distance distribution of Same-Strand 5' Ends fragments
+   
+		   (5) File of endpoint distance distribution of Opposite-Strand 5' Ends fragments
+   
+		   (6) File of Identical 6-mer end motifs profile of Same-Strand 5' Ends fragments
+   
+		   (7) File of Identical 6-mer end motifs profile of split-aligned fragments fragments
+   
+	       (8) Files of the 5ends of fragments corresponding to the files in the input file. 
+   
+5. **perl DiscordantAnalysis.pl  *<list_file>***
    
    Function:
    
-   (1) Perform statistic analysis on the discordant-aligned fragments from each sample.
+         (1) Perform statistic analysis on the discordant-aligned fragments from each sample.
    
-   (2) Perform  identical 6-mer end motifs analysis on the discordant-aligned fragments from each group
+         (2) Perform  identical 6-mer end motifs analysis on the discordant-aligned fragments from each group
 
    Input parameter:
          (1) Parameter *list_file* is a file contain the discordantly-aligned SAM filenames of a group of samples.
+   
              For example: list_HCC_discordant_pairs
+   
 		      which contains three lines and there is a filename on each line, such as following:
+   
 				         HCC1_discordant_pairs.sam
+   
 				         HCC2_discordant_pairs.sam
+   
 				         HCC3_discordant_pairs.sam
                          ...
-	 Output: 1. statics_discordant_fragments_list_HCC_discordant_pairs;
-             2. File of Identical 6-mer end motifs profile of discordantly-aligned fragments
+	 Output:
+
+             (1) statics_discordant_fragments_list_HCC_discordant_pairs;
+
+             (2) File of Identical 6-mer end motifs profile of discordantly-aligned fragments
    
-11. **Rscript EccDNAFE.R *<feature1,feature2,...>*  *<dir1>*  *<dir2>* ...**
+7. **Rscript EccDNAFE.R *<feature1,feature2,...>*  *<dir1>*  *<dir2>* *<...>* *<...>***
 
    Function: Extract eight types of feature profile, including BPM, EDM, JNM, SBM, OJM, OLR, CNV_onco, and CNV_im for each sample in the input directories, such as *dir1* *dir2* ...
+   
    Make sure the dependencies have properly installed. 
    
    Input parameter:
-   	     (1)*<feature1,feature2,...>*: available features include BPM, EDM, JNM, SBM, OJM, OLR, CNV_onco, and CNV_im.
-		 (2)*<dir1>*  *<dir2>* ...: the file directories containing the bam files of split_fragments/discordant_fragments. For bam files with discordant_fragments, only BPM, EDM, CNV_onco, and CNV_im are extracted. For bam files with split_fragments, BPM, EDM, JNM, SBM, OJM, OLR, CNV_onco, and CNV_im are extracted.
-   Output: A feature directory corresponding to each feature type is built for each input directory, and includes the feature profiles corresponding to the files under the input directory.
-   Example: Rscript EccDNAFE.R BPM,EDM,JNM,SBM,OJM,OLR,CNV_onco,CNV_im /path/to/dir1 /path/to/dir2 
    
-11. **runClassifiers *<Control_samples_dir>* *<DiseaseCase_samples_dir>* **
+   	     (1)*<feature1,feature2,...>*: available features include BPM, EDM, JNM, SBM, OJM, OLR, CNV_onco, and CNV_im.
+		 
+		 (2)*<dir1>*  *<dir2>* ...: the file directories containing the bam files of split_fragments/discordant_fragments. For bam files with discordant_fragments, only BPM, EDM, CNV_onco, and CNV_im are extracted. For bam files with split_fragments, BPM, EDM, JNM, SBM, OJM, OLR, CNV_onco, and CNV_im are extracted.
+		 
+   Output: A feature directory corresponding to each feature type is built for each input directory, and includes the feature profiles corresponding to the files under the input directory.
+   
+   Example:
+
+          Rscript EccDNAFE.R BPM,EDM,JNM,SBM,OJM,OLR,CNV_onco,CNV_im /path/to/dir1 /path/to/dir2 
+   
+8. **runClassifiers *<Control_samples_dir>* *<DiseaseCase_samples_dir>* **
 
     Function: Build Random Forest Classifier based on each type of cf-eccDNA feature, and build the assemble model (CFECC) based on the classifiers of eight types of cf-eccDNA features.
+    
     Input parameter:
+    
           (1)*<Control_samples_dir>*: A directory containing eight sub-directories corresponding to eight types of cf-eccDNA features of control samples.
+    
           (2)*<DiseaseCase_samples_dir>*: A directory containing eight sub-directories corresponding to eight types of cf-eccDNA features of case samples.
+    
     Output:
+    
           (1) GridSearch_All_Features_Results.csv: this file store the parameters of classifiers on the training dataset.
+    
           (2) ClassifyPerformance.csv: this file store the performance of eight classifiers and the assemble model (CFECC) on the validation dataset.
-    Example: 
+    
+    Example:
+    
            py runClassifiers.py /path/to/HCC /path/to/Control
     

@@ -15,12 +15,21 @@ This package is supported for *Linux* and *macOS*. The package has been tested o
 + macOS: ventura 13.2.1
 
 ### Prerequisites
-    Python --- 3.7.13
-    numpy --- 1.21.5
-    pandas --- 1.3.5
-    scikit-learn --- 1.0.2
-    Perl --- 5.32
-    R --- 4.3
+Please ensure the following dependencies are installed:
+
+**Python Packages:**
+- Python (>=3.7)
+- numpy
+- pandas
+- scikit-learn
+
+**R Packages:**
+- R (>=4.0)
+- Bioconductor: BSgenome, BSgenome.Hsapiens.UCSC.hg38, GenomeInfoDb, GenomicAlignments, GenomicRanges, IRanges, Rsamtools
+- CRAN: dplyr, mgsub, readxl, stringr, tidyr
+
+**Other:**
+- Perl
 	
  
 ### Installation
@@ -34,6 +43,7 @@ cd cfeccDNACodes
 conda env create -f environment.yml
 conda activate cfeccDNA_analysis
 ```
+
 ## Usage
 1. **sh map.sh *<input_dir>* *<output_dir>* *<genome_index_dir>***
    
@@ -63,7 +73,7 @@ conda activate cfeccDNA_analysis
    
    Output: The bam files of split-aligned fragments
    
-3. **runDiscordant_read.sh *<input_dir>* *<output_dir>***
+3. **sh runDiscordant_read.sh *<input_dir>* *<output_dir>***
 
    Function: Extract discordantly-aligned fragments from sorted BAM files.
    
@@ -131,6 +141,7 @@ conda activate cfeccDNA_analysis
          (2) Perform  identical 6-mer end motifs analysis on the discordant-aligned fragments from each group
 
    Input parameter:
+   
          (1) list_file is a file contain the discordantly-aligned SAM filenames of a group of samples.
    
              For example: list_HCC_discordant_pairs
@@ -149,7 +160,7 @@ conda activate cfeccDNA_analysis
 
              (2) File of Identical 6-mer end motifs profile of discordantly-aligned fragments
    
-6. **`Rscript EccDNAFE.R <feature1,feature2,...>  <dir1>  <dir2> ... <dirn>`***
+7. **Rscript EccDNAFE.R *<feature1,feature2,...>*  *\<dir1\>*  *\<dir2\>* ... *\<dirn\>***
 
    Function: Extract eight types of feature profile, including BPM, EDM, JNM, SBM, OJM, OLR, CNV_onco, and CNV_im for each sample in the input directories, such as *dir1* *dir2* ...
    
@@ -167,7 +178,7 @@ conda activate cfeccDNA_analysis
 
           Rscript EccDNAFE.R BPM,EDM,JNM,SBM,OJM,OLR,CNV_onco,CNV_im /path/to/dir1 /path/to/dir2 
    
-7. **runClassifiers *<Control_samples_dir>* *<DiseaseCase_samples_dir>***
+8. **runClassifiers *<Control_samples_dir>* *<DiseaseCase_samples_dir>***
 
     Function: Build Random Forest Classifier based on each type of cf-eccDNA feature, and build the assemble model (CFECC) based on the classifiers of eight types of cf-eccDNA features.
     

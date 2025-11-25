@@ -1,0 +1,1 @@
+remotes::install_local("./EccDNAFeature", dependencies = TRUE, upgrade = "always")

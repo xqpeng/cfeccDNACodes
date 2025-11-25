@@ -14,18 +14,6 @@ dependencies:
   
   # R package 
   - r-base=4.3
-  - bioconductor-bsgenome
-  - bioconductor-bsgenome.hsapiens.ucsc.hg38
-  - bioconductor-genomeinfodb
-  - bioconductor-genomicalignments
-  - bioconductor-genomicranges
-  - bioconductor-iranges
-  - bioconductor-rsamtools
-  - r-dplyr
-  - r-mgsub
-  - r-readxl
-  - r-stringr
-  - r-tidyr
   
   # Perl
   - perl

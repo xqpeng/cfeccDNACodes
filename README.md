@@ -42,6 +42,7 @@ cd cfeccDNACodes
 ```
 conda env create -f environment.yml
 conda activate cfeccDNA_analysis
+Rscript setup.R
 ```
 
 ## Usage

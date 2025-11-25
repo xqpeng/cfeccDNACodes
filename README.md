@@ -1,14 +1,8 @@
 # Introduction
 Cell free eccDNA codes (cfeccDNACodes) contains scripts for linearized cell-free eccDNA (cf-eccDNA) fragments analysis, cf-eccDNA feature extraction and cf-eccDNA feature-based cancer detection models.
 The functions provided in cf-eccDNACodes are illustrated as follows.
-<br/>
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://github.com/user-attachments/assets/a340c24a-5bd7-4a71-ba5e-acc5f64c6feb">
-    <br>
-</center>
-<br/>
+![codes](https://github.com/user-attachments/assets/5770489b-7ad9-4814-b872-ed6bbe63fa00)
+
 
 
 ## Getting Started
@@ -27,6 +21,7 @@ This package is supported for *Linux* and *macOS*. The package has been tested o
     scikit-learn --- 1.0.2
     Perl --- 5.32
     R --- 4.3
+	
  
 ### Installation
 1. **Necessary Step:** Download from Github:
@@ -56,7 +51,7 @@ conda activate cfeccDNA_analysis
    
     Output: Sorted bam files
 
-3. **sh runSplit_read.sh *<input_dir>* *<output_dir>***
+2. **sh runSplit_read.sh *<input_dir>* *<output_dir>***
    
    Function: Extract split-aligned fragments from sorted BAM files.
    
@@ -68,7 +63,7 @@ conda activate cfeccDNA_analysis
    
    Output: The bam files of split-aligned fragments
    
-4. **runDiscordant_read.sh *<input_dir>* *<output_dir>***
+3. **runDiscordant_read.sh *<input_dir>* *<output_dir>***
 
    Function: Extract discordantly-aligned fragments from sorted BAM files.
    
@@ -80,7 +75,7 @@ conda activate cfeccDNA_analysis
    
    Output: The bam files of split-aligned fragments
    
-5. **perl SplitAnalysis.pl *<list_file>***
+4. **perl SplitAnalysis.pl *<list_file>***
 
    Function:
    
@@ -93,7 +88,8 @@ conda activate cfeccDNA_analysis
           (4) Perform lengths, endpoint distances, and identical 6-mer end motifs analysis on the split-aligned fragments from each group.
 
    Input parameter:
-          (1)  <list_file> is a file contain the split-aligned SAM filenames of a group of samples.
+
+           (1)  <list_file> is a file contain the split-aligned SAM filenames of a group of samples.
    
               For example: list_HCC
    
@@ -107,6 +103,7 @@ conda activate cfeccDNA_analysis
    
                          ...
    Output:
+
            (1) statics_proportion_length_list_HCC; # corresponding to  function 2
    
            (Belowing are optional)
@@ -125,7 +122,7 @@ conda activate cfeccDNA_analysis
    
 	       (8) Files of the 5ends of fragments corresponding to the files in the input file. 
    
-6. **perl DiscordantAnalysis.pl  *<list_file>***
+5. **perl DiscordantAnalysis.pl  *<list_file>***
    
    Function:
    
@@ -152,7 +149,7 @@ conda activate cfeccDNA_analysis
 
              (2) File of Identical 6-mer end motifs profile of discordantly-aligned fragments
    
-7. **Rscript EccDNAFE.R *<feature1,feature2,...>*  *<dir1>*  *<dir2>* *<...>* *<...>***
+6. **`Rscript EccDNAFE.R <feature1,feature2,...>  <dir1>  <dir2> ... <dirn>`***
 
    Function: Extract eight types of feature profile, including BPM, EDM, JNM, SBM, OJM, OLR, CNV_onco, and CNV_im for each sample in the input directories, such as *dir1* *dir2* ...
    
@@ -162,7 +159,7 @@ conda activate cfeccDNA_analysis
    
    	     (1)<feature1,feature2,...>: available features include BPM, EDM, JNM, SBM, OJM, OLR, CNV_onco, and CNV_im.
 		 
-		 (2)<dir1>  <dir2> ...: the file directories containing the bam files of split_fragments/discordant_fragments. For bam files with discordant_fragments, only BPM, EDM, CNV_onco, and CNV_im are extracted. For bam files with split_fragments, BPM, EDM, JNM, SBM, OJM, OLR, CNV_onco, and CNV_im are extracted.
+		 (2)<dir1>  <dir2> ... <dirn>: the file directories containing the bam files of split_fragments/discordant_fragments. For bam files with discordant_fragments, only BPM, EDM, CNV_onco, and CNV_im are extracted. For bam files with split_fragments, BPM, EDM, JNM, SBM, OJM, OLR, CNV_onco, and CNV_im are extracted.
 		 
    Output: A feature directory corresponding to each feature type is built for each input directory, and includes the feature profiles corresponding to the files under the input directory.
    
@@ -170,16 +167,64 @@ conda activate cfeccDNA_analysis
 
           Rscript EccDNAFE.R BPM,EDM,JNM,SBM,OJM,OLR,CNV_onco,CNV_im /path/to/dir1 /path/to/dir2 
    
-8. **runClassifiers *<Control_samples_dir>* *<DiseaseCase_samples_dir>* **
+7. **runClassifiers *<Control_samples_dir>* *<DiseaseCase_samples_dir>***
 
     Function: Build Random Forest Classifier based on each type of cf-eccDNA feature, and build the assemble model (CFECC) based on the classifiers of eight types of cf-eccDNA features.
     
     Input parameter:
     
           (1)<Control_samples_dir>: A directory containing eight sub-directories corresponding to eight types of cf-eccDNA features of control samples.
+   			
+           Control_samples_dir/
+           ├──BPM
+           │   ├──sample1_BPM.txt
+           │   ├──sample2_BPM.txt
+           ├──EDM
+           │   ├──sample1_EDM.txt
+           │   ├──sample2_EDM.txt
+           ├──JNM
+           │   ├──sample1_JNM.txt
+           │   ├──sample2_JNM.txt
+           ├──SBM
+           │   ├──sample1_SBM.txt
+           │   ├──sample2_SBM.txt
+           ├──OJM
+           │   ├──sample1_SBM.txt
+           │   ├──sample2_SBM.txt
+           ├──OLR
+           │   ├──sample1_SBM.txt
+           │   ├──sample2_SBM.txt
+           ├──CNV_onco
+           │   ├──sample1_CNV_onco.txt
+           │   ├──sample2_CNV_onco.txt
+           
+
     
           (2)<DiseaseCase_samples_dir>: A directory containing eight sub-directories corresponding to eight types of cf-eccDNA features of case samples.
-    
+           
+           Control_samples_dir/
+           ├──BPM
+           │   ├──sample1_BPM.txt
+           │   ├──sample2_BPM.txt
+           ├──EDM
+           │   ├──sample1_EDM.txt
+           │   ├──sample2_EDM.txt
+           ├──JNM
+           │   ├──sample1_JNM.txt
+           │   ├──sample2_JNM.txt
+           ├──SBM
+           │   ├──sample1_SBM.txt
+           │   ├──sample2_SBM.txt
+           ├──OJM
+           │   ├──sample1_SBM.txt
+           │   ├──sample2_SBM.txt
+           ├──OLR
+           │   ├──sample1_SBM.txt
+           │   ├──sample2_SBM.txt
+           ├──CNV_onco
+           │   ├──sample1_CNV_onco.txt
+           │   ├──sample2_CNV_onco.txt
+           
     Output:
     
           (1) GridSearch_All_Features_Results.csv: this file store the parameters of classifiers on the training dataset.
@@ -188,5 +233,5 @@ conda activate cfeccDNA_analysis
     
     Example:
     
-           py runClassifiers.py /path/to/HCC /path/to/Control
+           python runClassifiers.py /path/to/HCC /path/to/Control
     

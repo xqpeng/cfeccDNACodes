@@ -626,6 +626,7 @@ sub ends5_analysis{
 	
 }
 
+
 sub estimate_length{
 	#fragments has different aligned chromosome, return 150+
 	#two or more fragments have the same chromosome, try to estimate length
@@ -837,7 +838,7 @@ sub estimate_length{
     	   }
      
         }
-      }
+
 
     
   
@@ -877,6 +878,6 @@ sub estimate_length{
      }
     }
 	return ($flag,$length,$con_inf,$cnv_inf);
-}
 
+}
 

@@ -1,27 +1,58 @@
 name: cfeccDNA_analysis
 channels:
-  - conda-forge
   - bioconda
+  - conda-forge
   - defaults
 dependencies:
-  # Python packages
+
   - python=3.10
-  - pandas
-  - numpy
-  - scipy
-  - matplotlib
-  - scikit-learn
+  - r-base=4.3.3
+  - pip           
   
-  # R package 
-  - r-base=4.3
+ 
+  - zlib          
+  - libxml2
+  - libiconv
   
-  # Perl
-  - perl
+ 
+  - git
+  - make
+  - pkg-config
+  - gcc_linux-64
+  - gxx_linux-64
+
   
-  # bioinformatics tools 
-  - samtools
+  - r-remotes
+  - r-optparse
+  - r-dplyr
+  - r-ggplot2
+  - r-stringr
+  - r-tidyr
+  - r-knitr
+  - r-rmarkdown
+  - r-readxl 
+  - r-mgsub
+
+  
+  - bioconductor-biostrings
+  - bioconductor-bsgenome
+  - bioconductor-genomicranges
+  - bioconductor-iranges
+  - bioconductor-rsamtools
+  - bioconductor-rtracklayer
+  - bioconductor-bsgenome.hsapiens.ucsc.hg38
+
+  
   - bedtools
+  - samtools
   - bwa
-  - fastqc
-  - multiqc
+  - macs3        
   
+ 
+  - numpy
+  - pandas
+  - matplotlib
+  - scipy
+  - pysam
+  
+ 

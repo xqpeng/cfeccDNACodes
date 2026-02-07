@@ -21,7 +21,7 @@ run_cnv_onco_wrapper <- function(bamfile) {
   
   src_file <- "./EccDNAFeature/R/runCNV_onco.R"
   if (!file.exists(src_file)) {
-    stop(paste("Error: 找不到源码文件", src_file, "。请确保您在 EccDNAFeature 文件夹所在目录运行脚本。"))
+    stop(paste("Error: cannot find the file ", src_file, ". Please make ensure run this script under the directory which containing EccDNAFeature package."))
   }
   
   source(src_file, local = TRUE)
@@ -33,7 +33,7 @@ run_cnv_onco_wrapper <- function(bamfile) {
 run_cnv_immu_wrapper <- function(bamfile) {
   src_file <- "./EccDNAFeature/R/runCNV_immu.R"
   if (!file.exists(src_file)) {
-    stop(paste("Error: 找不到源码文件", src_file))
+    stop(paste("Error: cannot find the file", src_file))
   }
   source(src_file, local = TRUE)
   feature_CNV(bamfile)
@@ -108,7 +108,7 @@ for (input_dir in input_dirs) {
     
     # create output file to store each feature profile  
     for (fname in feature_names) {
-      # 为每个特征创建子目录
+      # create sub-directory for each feature
       out_subdir <- file.path(main_output_dir, fname)
       if (!dir.exists(out_subdir)) {
         dir.create(out_subdir, showWarnings = FALSE)
@@ -118,7 +118,7 @@ for (input_dir in input_dirs) {
       
       result <- tryCatch({
         cat("    Calculating", fname, "... ")
-        # 调用对应的函数
+        # call corresponding function
         feature_mapping[[fname]](bam)
       }, error = function(e) {
         cat("ERROR:", conditionMessage(e), "\n")
@@ -138,7 +138,7 @@ for (input_dir in input_dirs) {
           cat("SUCCESS (printed output)\n")
         }
       } else {
-        # 如果失败，不要创建空文件或写错误信息，以免混淆
+        # If fail, do not create empty directory 
         cat("FAILED (No result returned)\n")
       }
     }

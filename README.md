@@ -40,7 +40,7 @@ cd cfeccDNACodes
 ```
 2. **Recommended Step:** (Conda users, Conda version: 4.12.0) Create your environment and activate it:
 ```
-conda env create -f environment.yml
+conda env create -f environment.yaml
 conda activate cfeccDNA_analysis
 Rscript setup.R
 ```
@@ -62,7 +62,19 @@ Rscript setup.R
    
     Output: Sorted bam files
 
-2. **sh runSplit_read.sh *<input_dir>* *<output_dir>***
+2. **sh bam2sam.sh -i *<input_dir>* -o *<output_dir>***
+
+	Function: Convert bam files into sam files
+	
+	Input parameters:
+   
+          (1) <input_dir>: the file directory containing the bam files
+   
+          (2) <output_dir>: the file directory to store the converted sam files
+	
+	Output: sam files
+
+3. **sh runSplit_read.sh *<input_dir>* *<output_dir>***
    
    Function: Extract split-aligned fragments from sorted BAM files.
    
@@ -74,7 +86,7 @@ Rscript setup.R
    
    Output: The bam files of split-aligned fragments
    
-3. **sh runDiscordant_read.sh *<input_dir>* *<output_dir>***
+4. **sh runDiscordant_read.sh *<input_dir>* *<output_dir>***
 
    Function: Extract discordantly-aligned fragments from sorted BAM files.
    
@@ -86,7 +98,7 @@ Rscript setup.R
    
    Output: The bam files of split-aligned fragments
    
-4. **perl SplitAnalysis.pl *<list_file>***
+5. **perl SplitAnalysis.pl *<list_file>***
 
    Function:
    
@@ -133,7 +145,7 @@ Rscript setup.R
    
 	       (8) Files of the 5ends of fragments corresponding to the files in the input file. 
    
-5. **perl DiscordantAnalysis.pl  *<list_file>***
+6. **perl DiscordantAnalysis.pl  *<list_file>***
    
    Function:
    

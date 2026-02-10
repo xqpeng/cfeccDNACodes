@@ -62,7 +62,32 @@ Rscript setup.R
    
     Output: Sorted bam files
 
-2. **sh bam2sam.sh -i *<input_dir>* -o *<output_dir>***
+
+2. **sh runSplit_read.sh *<input_dir>* *<output_dir>***
+   
+   Function: Extract split-aligned fragments from sorted bam files.
+   
+   Input parameters:
+   
+         (1) <input_dir>: the file directory containing the sorted bam files
+   
+         (2) <output_dir>: the file directory to store the bam files of split-aligned fragments
+   
+   Output: The bam files of split-aligned fragments
+   
+3. **sh runDiscordant_read.sh *<input_dir>* *<output_dir>***
+
+   Function: Extract discordantly-aligned fragments from sorted bam files.
+   
+   Input parameters:
+   
+         (1) <input_dir>: the file directory containing the sorted bam files
+   
+         (2) <output_dir>: the file directory to store the bam files of split-aligned fragments
+   
+   Output: The bam files of split-aligned fragments
+   
+4. **sh bam2sam.sh -i *<input_dir>* -o *<output_dir>***
 
 	Function: Convert bam files into sam files
 	
@@ -73,30 +98,6 @@ Rscript setup.R
           (2) <output_dir>: the file directory to store the converted sam files
 	
 	Output: sam files
-
-3. **sh runSplit_read.sh *<input_dir>* *<output_dir>***
-   
-   Function: Extract split-aligned fragments from sorted BAM files.
-   
-   Input parameters:
-   
-         (1) <input_dir>: the file directory containing the sorted bam files
-   
-         (2) <output_dir>: the file directory to store the bam files of split-aligned fragments
-   
-   Output: The bam files of split-aligned fragments
-   
-4. **sh runDiscordant_read.sh *<input_dir>* *<output_dir>***
-
-   Function: Extract discordantly-aligned fragments from sorted BAM files.
-   
-   Input parameters:
-   
-         (1) <input_dir>: the file directory containing the sorted bam files
-   
-         (2) <output_dir>: the file directory to store the bam files of split-aligned fragments
-   
-   Output: The bam files of split-aligned fragments
    
 5. **perl SplitAnalysis.pl *<list_file>***
 
@@ -112,7 +113,7 @@ Rscript setup.R
 
    Input parameter:
 
-           (1)  <list_file> is a file contain the split-aligned SAM filenames of a group of samples.
+           (1)  <list_file> is a file contain the split-aligned sam filenames of a group of samples.
    
               For example: list_HCC
    
@@ -155,7 +156,7 @@ Rscript setup.R
 
    Input parameter:
    
-         (1) list_file is a file contain the discordantly-aligned SAM filenames of a group of samples.
+         (1) list_file is a file contain the discordantly-aligned sam filenames of a group of samples.
    
              For example: list_HCC_discordant_pairs
    
@@ -191,7 +192,7 @@ Rscript setup.R
 
           Rscript EccDNAFE.R BPM,EDM,JNM,SBM,OJM,OLR,CNV_onco,CNV_im /path/to/dir1 /path/to/dir2 
    
-8. **runClassifiers *<Control_samples_dir>* *<DiseaseCase_samples_dir>***
+8. **runModel *<Control_samples_dir>* *<DiseaseCase_samples_dir>***
 
     Function: Build Random Forest Classifier based on each type of cf-eccDNA feature, and build the assemble model (CFECC) based on the classifiers of eight types of cf-eccDNA features.
     

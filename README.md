@@ -192,7 +192,7 @@ Rscript setup.R
 
           Rscript EccDNAFE.R BPM,EDM,JNM,SBM,OJM,OLR,CNV_onco,CNV_im /path/to/dir1 /path/to/dir2 
    
-8. **runModel *<Control_samples_dir>* *<DiseaseCase_samples_dir>***
+8. **runCFECCModel *<Control_samples_dir>* *<DiseaseCase_samples_dir>***
 
     Function: Build Random Forest Classifier based on each type of cf-eccDNA feature, and build the assemble model (CFECC) based on the classifiers of eight types of cf-eccDNA features.
     
@@ -222,12 +222,15 @@ Rscript setup.R
            ├──CNV_onco
            │   ├──sample1_CNV_onco.txt
            │   ├──sample2_CNV_onco.txt
+           ├──CNV_im
+           │   ├──sample1_CNV_im.txt
+           │   ├──sample2_CNV_im.txt
            
 
     
           (2)<DiseaseCase_samples_dir>: A directory containing eight sub-directories corresponding to eight types of cf-eccDNA features of case samples.
            
-           Control_samples_dir/
+           DiseaseCase_samples_dir/
            ├──BPM
            │   ├──sample1_BPM.txt
            │   ├──sample2_BPM.txt
@@ -249,6 +252,9 @@ Rscript setup.R
            ├──CNV_onco
            │   ├──sample1_CNV_onco.txt
            │   ├──sample2_CNV_onco.txt
+           ├──CNV_im
+           │   ├──sample1_CNV_im.txt
+           │   ├──sample2_CNV_im.txt
            
     Output:
     
@@ -258,5 +264,164 @@ Rscript setup.R
     
     Example:
     
-           python runClassifiers.py /path/to/HCC /path/to/Control
+           python runCFECCModel.py /path/to/HCC /path/to/Control
+
+9. **runCFDNAModel *<Control_samples_dir>* *<DiseaseCase_samples_dir>***
+
+    Function: Build Random Forest Classifier based on each type of cfDNA feature, and build the assemble model (CFDNA) based on the classifiers of five types of cfDNA features.
+    
+    Input parameter:
+    
+          (1)<Control_samples_dir>: A directory containing eight sub-directories corresponding to five types of cfDNA features of control samples.
+   			
+           Control_samples_dir/
+           ├──BPM_CFDNA
+           │   ├──sample1.BreakPointMotif
+           │   ├──sample2.BreakPointMotif
+           ├──EDM_CFDNA
+           │   ├──sample1.EndMotif
+           │   ├──sample2.EndMotif
+           ├──FSC
+           │   ├──sample1.sorted.FSC
+           │   ├──sample2.sorted.FSC
+           ├──FSD
+           │   ├──sample1.FSD
+           │   ├──sample2.FSD
+           ├──CNV
+           │   ├──sample1.CNV
+           │   ├──sample2_CNV_onco.txt
+          
+
+    
+          (2)<DiseaseCase_samples_dir>: A directory containing eight sub-directories corresponding to eight types of cf-eccDNA features of case samples.
+           
+           DiseaseCase_samples_dir/
+           ├──BPM_CFDNA
+           │   ├──sample1.BreakPointMotif
+           │   ├──sample2.BreakPointMotif
+           ├──EDM_CFDNA
+           │   ├──sample1.EndMotif
+           │   ├──sample2.EndMotif
+           ├──FSC
+           │   ├──sample1.sorted.FSC
+           │   ├──sample2.sorted.FSC
+           ├──FSD
+           │   ├──sample1.FSD
+           │   ├──sample2.FSD
+           ├──CNV
+           │   ├──sample1.CNV
+           │   ├──sample2_CNV_onco.txt
+           
+    Output:
+    
+          (1) GridSearch_All_Features_Results.csv: this file store the parameters of classifiers on the training dataset.
+    
+          (2) ClassifyPerformance.csv: this file store the performance of eight classifiers and the assemble model (CFDNA) on the validation dataset.
+    
+    Example:
+    
+           python runCFDNAModel.py /path/to/HCC /path/to/Control
+           
+10. **runCFDNA_CFECCModel *<Control_samples_dir>* *<DiseaseCase_samples_dir>***
+
+    Function: Build Random Forest Classifier based on each type of cf-eccDNA/cfDNA feature, and build the assemble model (CFDNA+CFECC) based on the classifiers of five types of cfDNA features and eight types of cf-eccDNA features.
+    
+    Input parameter:
+    
+          (1)<Control_samples_dir>: A directory containing 13 sub-directories corresponding to five types of cfDNA features and eight types of cf-eccDNA features of control samples.
+   			
+           Control_samples_dir/
+           ├──BPM_CFDNA
+           │   ├──sample1.BreakPointMotif
+           │   ├──sample2.BreakPointMotif
+           ├──EDM_CFDNA
+           │   ├──sample1.EndMotif
+           │   ├──sample2.EndMotif
+           ├──FSC
+           │   ├──sample1.sorted.FSC
+           │   ├──sample2.sorted.FSC
+           ├──FSD
+           │   ├──sample1.FSD
+           │   ├──sample2.FSD
+           ├──CNV
+           │   ├──sample1.CNV
+           │   ├──sample2_CNV_onco.txt
+           ├──BPM
+           │   ├──sample1_BPM.txt
+           │   ├──sample2_BPM.txt
+           ├──EDM
+           │   ├──sample1_EDM.txt
+           │   ├──sample2_EDM.txt
+           ├──JNM
+           │   ├──sample1_JNM.txt
+           │   ├──sample2_JNM.txt
+           ├──SBM
+           │   ├──sample1_SBM.txt
+           │   ├──sample2_SBM.txt
+           ├──OJM
+           │   ├──sample1_SBM.txt
+           │   ├──sample2_SBM.txt
+           ├──OLR
+           │   ├──sample1_SBM.txt
+           │   ├──sample2_SBM.txt
+           ├──CNV_onco
+           │   ├──sample1_CNV_onco.txt
+           │   ├──sample2_CNV_onco.txt
+           ├──CNV_im
+           │   ├──sample1_CNV_im.txt
+           │   ├──sample2_CNV_im.txt          
+
+    
+          (2)<DiseaseCase_samples_dir>: A directory containing eight sub-directories corresponding to eight types of cf-eccDNA features of case samples.
+           
+           DiseaseCase_samples_dir/
+           ├──BPM_CFDNA
+           │   ├──sample1.BreakPointMotif
+           │   ├──sample2.BreakPointMotif
+           ├──EDM_CFDNA
+           │   ├──sample1.EndMotif
+           │   ├──sample2.EndMotif
+           ├──FSC
+           │   ├──sample1.sorted.FSC
+           │   ├──sample2.sorted.FSC
+           ├──FSD
+           │   ├──sample1.FSD
+           │   ├──sample2.FSD
+           ├──CNV
+           │   ├──sample1.CNV
+           │   ├──sample2_CNV_onco.txt
+           ├──BPM
+           │   ├──sample1_BPM.txt
+           │   ├──sample2_BPM.txt
+           ├──EDM
+           │   ├──sample1_EDM.txt
+           │   ├──sample2_EDM.txt
+           ├──JNM
+           │   ├──sample1_JNM.txt
+           │   ├──sample2_JNM.txt
+           ├──SBM
+           │   ├──sample1_SBM.txt
+           │   ├──sample2_SBM.txt
+           ├──OJM
+           │   ├──sample1_SBM.txt
+           │   ├──sample2_SBM.txt
+           ├──OLR
+           │   ├──sample1_SBM.txt
+           │   ├──sample2_SBM.txt
+           ├──CNV_onco
+           │   ├──sample1_CNV_onco.txt
+           │   ├──sample2_CNV_onco.txt
+           ├──CNV_im
+           │   ├──sample1_CNV_im.txt
+           │   ├──sample2_CNV_im.txt           
+           
+    Output:
+    
+          (1) GridSearch_All_Features_Results.csv: this file store the parameters of classifiers on the training dataset.
+    
+          (2) ClassifyPerformance.csv: this file store the performance of eight classifiers and the assemble model (CFDNA+CFECC) on the validation dataset.
+    
+    Example:
+    
+           python runCFDNA_CFECCModel.py /path/to/HCC /path/to/Control           
     

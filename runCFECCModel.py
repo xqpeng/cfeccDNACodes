@@ -177,7 +177,7 @@ def loadFeature(Case_path, Control_path, X_train, X_test, Feature):
 
 
 def GridSearch_base(X_train, y_train):
-    rf = RandomForestClassifier(random_state=32)
+    rf = RandomForestClassifier(random_state=GLOBAL_RANDOM_STATE)
     param_grid = {
 
         'n_estimators': [10, 20, 30, 50, 100, 200],
@@ -220,7 +220,7 @@ def GridSearch_meta(X_train, y_train):
 
 
 def training_BaseModel(X_train, y_train, disease_test, best_params, blend_train, j):
-    clf = RandomForestClassifier(random_state=32, **best_params)
+    clf = RandomForestClassifier(random_state=GLOBAL_RANDOM_STATE, **best_params)
     skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=GLOBAL_RANDOM_STATE)
     blend_disease_j = np.zeros((disease_test.shape[0], n_folds))
 
@@ -307,7 +307,7 @@ def main():
     print(f"Total samples identified: {len(all_name)}")
 
     X_train_names, X_test_names, _, _ = train_test_split(all_name, n_label, stratify=n_label, test_size=0.3,
-                                                         random_state=2)
+                                                         random_state=GLOBAL_RANDOM_STATE)
 
 
     feature_X_train = {}

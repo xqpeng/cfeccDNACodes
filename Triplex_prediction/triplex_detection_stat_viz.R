@@ -7,9 +7,15 @@ library(readr)
 library(ggplot2)
 library(ggpubr)
 
-# --- 1. Path Configuration ---
-RESULTS_DIR <- "D:\\triplex\\triplex(R)\\batch_results_Final_DocCorrect2"
-GROUP_FILE  <- "D:\\triplex\\Target_sequences\\5093_README.txt"
+# --- 1. Path Configuration (Modified for Command Line Args) ---
+args <- commandArgs(trailingOnly = TRUE)
+
+if (length(args) < 2) {
+  stop("Error: Please provide <Results_Directory> and <Group_File_Path>")
+}
+
+RESULTS_DIR <- args[1]
+GROUP_FILE  <- args[2]
 
 OUTPUT_PLOT_DIR <- file.path(RESULTS_DIR, "Custom_Style_Plots_Positive_Final_v8_LargeFont")
 if (!dir.exists(OUTPUT_PLOT_DIR)) dir.create(OUTPUT_PLOT_DIR)
@@ -17,11 +23,11 @@ if (!dir.exists(OUTPUT_PLOT_DIR)) dir.create(OUTPUT_PLOT_DIR)
 # --- 2. Color Palette for Biological Groups ---
 my_colors <- c(
   "Control" = "#525252",
-  "HCC"     = "#D93636",
+  "HCC"      = "#D93636",
   "HNSCC"   = "#3478C4",
-  "NPC"     = "#54A356",
-  "CRC"     = "#9655AA",
-  "LC"      = "#D6A629"
+  "NPC"      = "#54A356",
+  "CRC"      = "#9655AA",
+  "LC"       = "#D6A629"
 )
 
 # Global font family initialization

@@ -14,10 +14,16 @@ library(ggplot2)
 library(Biostrings) 
 library(parallel) 
 
-# --- 1. Path Configuration ---
-POS_RES_DIR <- "D:\\Triplex\\triplex(R)\\batch_results_Final_DocCorrect2"
-POS_FASTA_DIR <- "D:\\Triplex\\Target_sequences\\output_fasta_5bp_filtered"
-GROUP_FILE <- "D:\\Triplex\\Target_sequences\\5093_README.txt"
+# --- 1. Path Configuration (Modified for Command Line Args) ---
+args <- commandArgs(trailingOnly = TRUE)
+
+if (length(args) < 3) {
+  stop("Error: Please provide <Results_Directory> <Refined_FASTA_Dir> <Group_File_Path>")
+}
+
+POS_RES_DIR   <- args[1]
+POS_FASTA_DIR <- args[2]
+GROUP_FILE    <- args[3]
 
 # Version 6 fast-processing output directory
 OUTPUT_DIR <- file.path(POS_RES_DIR, "Combined_Distance_Analysis_Select5Prime_V6_Fast")
@@ -184,7 +190,6 @@ run_batch_processing <- function(res_dir, fasta_dir, n_cores, batch_size) {
     cat(sprintf("   Batch %d/%d (18 Threads)... ", i, length(chunks)))
     
     cl <- makeCluster(n_cores)
-    # Export essential libraries to worker nodes
     clusterEvalQ(cl, {
       library(data.table)
       library(stringi)
@@ -260,11 +265,11 @@ if (!is.null(pos_result)) {
   out_file <- file.path(OUTPUT_DIR, "04_Distance_Distribution_Select5Prime_Fast.png")
   ggsave(out_file, p, width = 23.44, height = 18.36, units = "cm", dpi = 300)
   
-  cat("\n✅ Processing Complete!\n")
-  cat("✅ Optimized for Speed: C++ string matching and vectorized math.\n")
-  cat("✅ Primary Output: closest_5prime_triplex.csv\n")
-  cat("✅ Figure Generated: ", out_file, "\n")
+  cat("\n Processing Complete!\n")
+  cat(" Optimized for Speed: C++ string matching and vectorized math.\n")
+  cat(" Primary Output: closest_5prime_triplex.csv\n")
+  cat(" Figure Generated: ", out_file, "\n")
   
 } else {
-  cat("❌ Error: No data generated.\n")
+  cat(" Error: No data generated.\n")
 }

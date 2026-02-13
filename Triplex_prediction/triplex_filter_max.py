@@ -5,11 +5,9 @@ import glob
 import pandas as pd
 import multiprocessing as mp
 import time
+import argparse
 
 # ================= Configuration Area =================
-# Root directory containing the batch analysis results
-ROOT_DIR = r"D:\Triplex\triplex(R)\batch_results_Final_DocCorrect2"
-
 # Number of CPU cores for parallel processing
 NUM_CORES = 16
 
@@ -73,12 +71,22 @@ def process_single_folder(folder_path):
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Filter best score triplex sequences.")
+    parser.add_argument("root_dir", help="Root directory containing the batch analysis results")
+    args = parser.parse_args()
+
+    ROOT_DIR = args.root_dir
+
     start_time = time.time()
     print(f"🚀 Starting Best Score Selection for Triplex sequences...")
     print(f"Root Directory: {ROOT_DIR}")
 
     # 1. Retrieve all subfolders
     # Assumes each sample is located in a first-level subdirectory under ROOT_DIR
+    if not os.path.exists(ROOT_DIR):
+        print(f"❌ Error: Directory not found: {ROOT_DIR}")
+        return
+
     subfolders = [f.path for f in os.scandir(ROOT_DIR) if f.is_dir()]
 
     if not subfolders:

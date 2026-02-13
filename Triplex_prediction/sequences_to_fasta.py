@@ -1,13 +1,6 @@
 import os
 import glob
-
-INPUT_FOLDER = r"D:\triplex\Target_sequences"
-OUTPUT_FOLDER = os.path.join(INPUT_FOLDER, "output_fasta_final")
-
-if not os.path.exists(OUTPUT_FOLDER):
-    os.makedirs(OUTPUT_FOLDER)
-
-
+import argparse
 
 def get_reverse_complement_strictly(seq):
     """
@@ -109,8 +102,17 @@ def process_line_data(line):
     return header, merged_seq
 
 
-
 def main():
+    parser = argparse.ArgumentParser(description="Convert raw sequence files to FASTA.")
+    parser.add_argument("input_dir", help="Path to the directory containing input files.")
+    args = parser.parse_args()
+
+    INPUT_FOLDER = args.input_dir
+    OUTPUT_FOLDER = os.path.join(INPUT_FOLDER, "output_fasta_final")
+
+    if not os.path.exists(OUTPUT_FOLDER):
+        os.makedirs(OUTPUT_FOLDER)
+
     all_files = glob.glob(os.path.join(INPUT_FOLDER, "*"))
     input_files = [f for f in all_files if os.path.isfile(f)]
 

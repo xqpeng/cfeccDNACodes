@@ -8,7 +8,7 @@ run_triplex_analysis <- function(fasta_path, output_dir,
                                    run_min_score = 1,
                                    run_min_len = 6,
                                    run_p_value = 0.05,
-                                   run_min_loop = 6,   
+                                   run_min_loop = 6,    
                                    run_max_loop = 90) {  
   
   if (!requireNamespace("Biostrings", quietly = TRUE)) library(Biostrings)
@@ -220,8 +220,13 @@ batch_process_parallel <- function(input_dir, output_base_dir, cores_to_use, par
 
 # 3. Entry Point: Defines parameters and executes the batch pipeline
 main <- function() {
-  input_dir <- "D:\\triplex\\Target_sequences\\negative\\matched_output_exact"
-  output_base_dir <- "D:\\triplex\\triplex(R)\\batch_results_Final_DocCorrect_negative2"
+  args <- commandArgs(trailingOnly = TRUE)
+  if (length(args) < 2) {
+    stop("Usage: Rscript triplex_parallel_search_pipeline.R <input_dir> <output_base_dir>")
+  }
+
+  input_dir <- args[1]
+  output_base_dir <- args[2]
   
   # User-defined search constraints maintained for reproducibility
   run_params <- list(

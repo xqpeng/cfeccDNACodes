@@ -9,9 +9,15 @@ library(readr)
 library(ggplot2)
 library(ggridges)
 
-# --- 1. Path Configuration ---
-POS_DIR <- "D:\\Triplex\\triplex(R)\\batch_results_Final_DocCorrect2"
-GROUP_FILE <- "D:\\Triplex\\Target_sequences\\5093_README.txt"
+# --- 1. Path Configuration (Modified for Command Line Args) ---
+args <- commandArgs(trailingOnly = TRUE)
+
+if (length(args) < 2) {
+  stop("Error: Please provide <Results_Directory> and <Group_File_Path>")
+}
+
+POS_DIR <- args[1]
+GROUP_FILE <- args[2]
 
 # Output directory for publication-quality score analysis
 OUTPUT_DIR <- file.path(POS_DIR, "Combined_Score_Analysis_Final_Best")
@@ -107,10 +113,8 @@ theme_plot1 <- theme_bw() + theme(
   # Legend styling: white background with black solid border
   legend.background = element_rect(fill = "white", color = "black", size = 0.5),
   legend.key = element_rect(fill = "transparent", color = NA),
-  legend.title = element_blank(),
-  
-  # Legend text sizing
   legend.text = element_text(size = 20, family = font_family),
+  legend.title = element_blank(),
   
   panel.grid.minor = element_blank(),
   
